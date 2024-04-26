@@ -10,10 +10,10 @@ variable "password" {
   default = "password@123"
 }
 
-variable "compute_sa" {
-  type        = string
-  description = "(optional) describe your variable"
-}
+# variable "compute_sa" {
+#   type        = string
+#   description = "(optional) describe your variable"
+# }
 
 variable "user" {
   type    = string
