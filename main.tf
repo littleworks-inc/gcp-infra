@@ -12,6 +12,5 @@ module "cloudsql-sql-" {
   region            = "northamerica-northeast1"
   database_project  = var.project_id
   label_environment = var.label_environment
-  label_app_no      = var.label_app_no
   label_application = var.label_application
 }

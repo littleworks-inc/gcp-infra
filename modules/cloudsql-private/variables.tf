@@ -82,11 +82,6 @@ variable "label_environment" {
   description = "(required) environment label for gcp"
 }
 
-variable "label_app_no" {
-  type        = string
-  description = "(required) owner of the resource in gcp"
-}
-
 variable "label_application" {
   type        = string
   description = "(required) application label for resource"

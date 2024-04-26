@@ -36,7 +36,6 @@ resource "google_sql_database_instance" "db_instance" {
     }
     user_labels = {
       environment = var.label_environment
-      app_no      = var.label_app_no
       application = var.label_application
       created_on  = replace(time_static.creation_time.rfc3339, "/[- TZ:]/", "")
     }
