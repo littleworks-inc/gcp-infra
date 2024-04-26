@@ -1,4 +1,4 @@
-module "cloudsql-sql-" {
+module "cloudsql-sql" {
   source            = "./modules/cloudsql-private"
   disk_size         = "50"
   instance_type     = "db-custom-8-30720"
