@@ -7,6 +7,7 @@ variable "project_id" {
 
 variable "password"{
     type = "string"
+    default = "password@123"
 }
 
 variable "compute_sa" {
@@ -16,12 +17,12 @@ variable "compute_sa" {
 
 variable "user"{
     type = "string"
-    default = "lcluser"
+    default = ""
 }
 
 variable "label_environment"{
     type = "string"
-    default = "production"
+    default = ""
 }
 
 variable "label_app_no"{
@@ -31,6 +32,7 @@ variable "label_app_no"{
 
 variable "label_application"{
     type = "string"
+    default = ""
 }
 
 variable "val_deletion_protection" {
