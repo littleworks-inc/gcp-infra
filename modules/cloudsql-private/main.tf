@@ -35,11 +35,10 @@ resource "google_sql_database_instance" "db_instance" {
       private_network = data.google_compute_network.vpc.self_link #var.vpc_link # the VPC where the db will be assigned a private IP
     }
     user_labels = {
-      environment     = var.label_environment
-      app_no          = var.label_app_no
-      snow_queue_name = var.label_snow_queue_name
-      application     = var.label_application
-      created_on      = replace(time_static.creation_time.rfc3339, "/[- TZ:]/", "")
+      environment = var.label_environment
+      app_no      = var.label_app_no
+      application = var.label_application
+      created_on  = replace(time_static.creation_time.rfc3339, "/[- TZ:]/", "")
     }
 
     backup_configuration {

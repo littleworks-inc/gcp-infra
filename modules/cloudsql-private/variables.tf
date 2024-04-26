@@ -87,11 +87,6 @@ variable "label_app_no" {
   description = "(required) owner of the resource in gcp"
 }
 
-variable "label_snow_queue_name" {
-  type        = string
-  description = "(required) snow queue for gcp project resource"
-}
-
 variable "label_application" {
   type        = string
   description = "(required) application label for resource"
