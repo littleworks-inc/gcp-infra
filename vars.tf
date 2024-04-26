@@ -1,4 +1,4 @@
-variable "credentials" {}
+# variable "credentials" {}
 
 variable "project_id" {
   type    = string
