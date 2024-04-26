@@ -38,12 +38,12 @@ jobs:
           
       - name: Initialize Terraform and fmt
         uses: hashicorp/setup-terraform@v1
+        
+      - name: Init Terraform configuration
+        run: terraform init
 
       - name: Validate Terraform configuration
         run: terraform validate
-
-      - name: Init Terraform configuration
-        run: terraform init
 
       - name: Plan Terraform deployment
         run: terraform plan -out=tfplan
