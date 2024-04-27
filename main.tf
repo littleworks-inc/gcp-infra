@@ -68,7 +68,7 @@ module "storage_bucket_01" {
 module "cloudsql-sql" {
   source            = "./modules/cloudsql-private"
   disk_size         = "50"
-  instance_type     = "db-custom-8-30720"
+  instance_type     = "db-f1-micro"
   user              = var.user
   password          = var.password
   vpc_project_name  = module.vpc_creation.vpc_project #var.sql_vpc_project_name
