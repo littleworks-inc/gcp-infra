@@ -20,6 +20,9 @@ jobs:
             tf_vars_file: dev.tfvars 
             enable_TFSEC: true 
             # environment: dev
+        permissions:
+          contents: 'read'
+          id-token: 'write'
 
     Dev_Deploy:
         needs: Dev_Plan
@@ -31,3 +34,6 @@ jobs:
             gcp_backend_bucket_prefix: terraform
             tf_vars_file: dev.tfvars 
             # environment: dev
+        permissions:
+            contents: 'read'
+            id-token: 'write'
