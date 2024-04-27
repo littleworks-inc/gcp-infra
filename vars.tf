@@ -24,7 +24,7 @@ variable "label_application" {
 }
 
 variable "val_deletion_protection" {
-  default = true
+  default = false
 }
 
 variable "region" {
