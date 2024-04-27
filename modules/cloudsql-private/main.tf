@@ -19,8 +19,9 @@ resource "google_sql_database_instance" "db_instance" {
   database_version = var.db_version
   # depends_on       = [var.db_depends_on]
   # root_password    = "${var.sql_root_password}"
-  project = var.database_project
-  region  = var.region
+  project             = var.database_project
+  region              = var.region
+  deletion_protection = false
 
   settings {
     tier              = var.instance_type
@@ -29,8 +30,8 @@ resource "google_sql_database_instance" "db_instance" {
     disk_size         = var.disk_autoresize ? null : var.disk_size
 
     ip_configuration {
-      ipv4_enabled    = var.public_ip
-      private_network = data.google_compute_network.vpc.self_link #var.vpc_link # the VPC where the db will be assigned a private IP
+      ipv4_enabled                                  = var.public_ip
+      private_network                               = data.google_compute_network.vpc.self_link #var.vpc_link # the VPC where the db will be assigned a private IP
       enable_private_path_for_google_cloud_services = true
     }
     user_labels = {
