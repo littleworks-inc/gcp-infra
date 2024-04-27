@@ -8,11 +8,6 @@ variable "password" {
   type    = string
 }
 
-# variable "compute_sa" {
-#   type        = string
-#   description = "(optional) describe your variable"
-# }
-
 variable "user" {
   type    = string
   default = ""

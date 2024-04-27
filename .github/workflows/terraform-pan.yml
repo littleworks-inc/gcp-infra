@@ -38,9 +38,6 @@ jobs:
   build-plan:
     runs-on: ubuntu-latest
     # environment: ${{ inputs.environment }}
-    permissions:
-      contents: 'read'
-      id-token: 'write'
     
     defaults:
       run:

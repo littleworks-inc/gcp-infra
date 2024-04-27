@@ -7,8 +7,6 @@ locals {
 
 // db module for private ip
 
-resource "time_static" "creation_time" {}
-
 resource "google_sql_database" "main" {
   name     = var.database_name
   instance = google_sql_database_instance.db_instance.name
@@ -37,7 +35,6 @@ resource "google_sql_database_instance" "db_instance" {
     user_labels = {
       environment = var.label_environment
       application = var.label_application
-      created_on  = replace(time_static.creation_time.rfc3339, "/[- TZ:]/", "")
     }
 
     backup_configuration {
