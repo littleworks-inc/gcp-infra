@@ -1,55 +1,37 @@
-name: Terraform Deployment
+name: 'Infra_build'
+
 on:
   push:
     branches:
       - main
-env:
-  PROJECT_ID: "nomadic-rush-408023"
-  PROJECT_NO: "428136795394"
+  pull_request:
+
+permissions:
+  contents: read
 
 jobs:
-  terraform:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      
-      - id: 'auth'
-        name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v2'
+    Dev_Plan:
+        uses: littleworks-inc/gcp_terraform_demo/.github/workflows/terraform-pan.yml@main
         with:
-          create_credentials_file: 'true'
-          workload_identity_provider: 'projects/${{env.PROJECT_NO}}/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+            path: .
+            tf_version: latest
+            gcp_backend_bucket: gcp-gitlab-ci-demo-01
+            gcp_backend_bucket_prefix: terraform
+            tf_vars_file: dev.tfvars 
+            enable_TFSEC: true 
+            # environment: dev
+        # secrets:
+        #     GOOGLE_CREDENTIALS: ${{ secrets.TF_SA }}
 
-         # Below are from the above terraform code 
-         # workloadIdentityPools = gh-identity-pool
-         # providers/gh-provider'
-
-          service_account: 'gcp-workload-identity@${{env.PROJECT_ID}}.iam.gserviceaccount.com'
-
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v1'
+    Dev_Deploy:
+        needs: Dev_Plan
+        uses: littleworks-inc/gcp_terraform_demo/.github/workflows/terraform-apply.yml@main
         with:
-          version: '>= 363.0.0'
-          
-      - name: Initialize Terraform and fmt
-        uses: hashicorp/setup-terraform@v1
-
-      - name: Init Terraform configuration
-        run: terraform init
-
-      - name: Validate Terraform configuration
-        run: terraform validate
-
-      - name: Plan Terraform deployment
-        run: terraform plan -out=tfplan
-
-    #   - name: Apply Terraform changes
-    #     run: terraform apply tfplan -auto-approve
-
-    #   - name: Clean up Terraform artifacts
-    #     run: rm -f tfplan
+            path: .
+            tf_version: latest
+            gcp_backend_bucket: gcp-gitlab-ci-demo-01
+            gcp_backend_bucket_prefix: terraform
+            tf_vars_file: dev.tfvars 
+            # environment: dev
+        # secrets:
+        #     GOOGLE_CREDENTIALS: ${{ secrets.TF_SA }}
