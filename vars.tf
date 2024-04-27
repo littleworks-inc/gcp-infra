@@ -2,12 +2,10 @@
 
 variable "project_id" {
   type    = string
-  default = "nomadic-rush-408023"
 }
 
 variable "password" {
   type    = string
-  default = "password@123"
 }
 
 # variable "compute_sa" {
