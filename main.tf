@@ -80,5 +80,5 @@ module "cloudsql-sql" {
   database_project  = var.project_id
   label_environment = var.label_environment
   label_application = var.label_application
-  depends_on        = [google_compute_global_address.private_ip_address]
+  depends_on        = [google_service_networking_connection.private_vpc_connection]
 }
