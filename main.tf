@@ -1,9 +1,27 @@
+module "enable-api" {
+  source = "./modules/enable_apis"
+  project_id = var.project_id
+  enable_api_services = ["vpcaccess.googleapis.com",
+                         "pubsub.googleapis.com",
+                         "containerregistry.googleapis.com",
+                         "monitoring.googleapis.com",
+                         "iap.googleapis.com",
+                         "pubsublite.googleapis.com",
+                         "iamcredentials.googleapis.com",
+                         "serviceusage.googleapis.com",
+                         "iam.googleapis.com",
+                         "redis.googleapis.com",
+                         "sqladmin.googleapis.com",
+                         "secretmanager.googleapis.com"]
+}
+
 module "vpc_composer" {
   source                      = "./modules/vpc_creation"
   vpc_name                    = "test-vpc"
   vpc_description             = "VPC network for composer deployement"
   vpc_auto_create_subnetworks = "false"
   vpc_routing_mode            = "REGIONAL"
+  depends_on = [ module.enable-api ]
 }
 
 module "custom_subnet_01" {
