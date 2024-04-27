@@ -22,6 +22,14 @@ on:
         description: 'GCP Storage bucket folder name to store terraform state file.'
         required: true
         type: string
+      workload_identity_provider:
+        description: 'gcp project iD'
+        required: true
+        type: string
+      service_account:
+        description: 'gcp project number'
+        required: true
+        type: string
       # environment:
       #   description: 'manual approvals in GitHub Actions with the Environments.'
       #   required: true
@@ -40,8 +48,8 @@ jobs:
     env:
       bucket_name: ${{ inputs.gcp_backend_bucket }}
       bucket_prefix: ${{ inputs.gcp_backend_bucket_prefix }}
-      PROJECT_ID: "nomadic-rush-408023"
-      PROJECT_NO: "428136795394"
+      # PROJECT_ID: "nomadic-rush-408023"
+      # PROJECT_NO: "428136795394"
     
     steps:
     - name: Checkout
@@ -52,8 +60,8 @@ jobs:
       uses: 'google-github-actions/auth@v2'
       with:
         # create_credentials_file: 'true'
-        workload_identity_provider: 'projects/${{env.PROJECT_NO}}/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
-        service_account: 'gcp-workload-identity@${{env.PROJECT_ID}}.iam.gserviceaccount.com'
+        workload_identity_provider: ${{ inputs.workload_identity_provider }}
+        service_account: ${{ inputs.service_account }}
 
     - name: Download Artifact
       uses: actions/download-artifact@v3.0.2
