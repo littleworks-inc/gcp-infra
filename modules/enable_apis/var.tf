@@ -1,4 +1,4 @@
-variable "enable_api_services"{
-    type = list
+variable "enable_api_services" {
+  type = list(any)
 }
-variable "project_id"{}
+variable "project_id" {}

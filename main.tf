@@ -1,19 +1,20 @@
 module "enable-api" {
-  source = "./modules/enable_apis"
+  source     = "./modules/enable_apis"
   project_id = var.project_id
   enable_api_services = [
-                        "vpcaccess.googleapis.com",
-                         "pubsub.googleapis.com",
-                         "containerregistry.googleapis.com",
-                         "monitoring.googleapis.com",
-                         "iap.googleapis.com",
-                         "pubsublite.googleapis.com",
-                         "iamcredentials.googleapis.com",
-                         "serviceusage.googleapis.com",
-                         "iam.googleapis.com",
-                         "redis.googleapis.com",
-                         "sqladmin.googleapis.com",
-                         "secretmanager.googleapis.com"]
+    "vpcaccess.googleapis.com",
+    "pubsub.googleapis.com",
+    "containerregistry.googleapis.com",
+    "monitoring.googleapis.com",
+    "iap.googleapis.com",
+    "pubsublite.googleapis.com",
+    "iamcredentials.googleapis.com",
+    "serviceusage.googleapis.com",
+    "iam.googleapis.com",
+    "redis.googleapis.com",
+    "sqladmin.googleapis.com",
+    "secretmanager.googleapis.com",
+  "servicenetworking.googleapis.com"]
 }
 
 module "vpc_creation" {
@@ -22,7 +23,7 @@ module "vpc_creation" {
   vpc_description             = "VPC network for composer deployement"
   vpc_auto_create_subnetworks = "false"
   vpc_routing_mode            = "REGIONAL"
-  depends_on = [ module.enable-api ]
+  depends_on                  = [module.enable-api]
 }
 
 module "custom_subnet_01" {
@@ -43,7 +44,7 @@ resource "google_compute_global_address" "private_ip_address" {
   address_type  = "INTERNAL"
   prefix_length = 16
   network       = module.vpc_creation.vpc_id
-  depends_on = [ module.vpc_creation ]
+  depends_on    = [module.vpc_creation]
 }
 
 resource "google_service_networking_connection" "private_vpc_connection" {
@@ -54,14 +55,14 @@ resource "google_service_networking_connection" "private_vpc_connection" {
   reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
 }
 
- module "storage_bucket_01"  {
-   source                = "./modules/storage"
-   region                = "northamerica-northeast1"
-   bucket_name           = "sb-dia-gcyhero-${var.label_environment}-data-staging"
-   project_name          = var.project_id
-   bucket_storage_class  = "STANDARD"
-   label_environment     = var.label_environment
-   label_application     = var.application
+module "storage_bucket_01" {
+  source               = "./modules/storage"
+  region               = "northamerica-northeast1"
+  bucket_name          = "sb-dia-gcyhero-${var.label_environment}-data-staging"
+  project_name         = var.project_id
+  bucket_storage_class = "STANDARD"
+  label_environment    = var.label_environment
+  label_application    = var.application
 }
 
 module "cloudsql-sql" {
@@ -71,13 +72,13 @@ module "cloudsql-sql" {
   user              = var.user
   password          = var.password
   vpc_project_name  = module.vpc_creation.vpc_project #var.sql_vpc_project_name
-  vpc_name          = module.vpc_creation.vpc_name  #var.sql_vpc_name
-  av_type           = "REGIONAL"    #var.sql_av_type
-  db_version        = "POSTGRES_15" #var.sql_db_version
+  vpc_name          = module.vpc_creation.vpc_name    #var.sql_vpc_name
+  av_type           = "REGIONAL"                      #var.sql_av_type
+  db_version        = "POSTGRES_15"                   #var.sql_db_version
   db_name           = "sql-bitools-prd-02"
   region            = "northamerica-northeast1"
   database_project  = var.project_id
   label_environment = var.label_environment
   label_application = var.label_application
-  depends_on = [ google_compute_global_address.private_ip_address ]
+  depends_on        = [google_compute_global_address.private_ip_address]
 }

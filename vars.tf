@@ -1,11 +1,11 @@
 # variable "credentials" {}
 
 variable "project_id" {
-  type    = string
+  type = string
 }
 
 variable "password" {
-  type    = string
+  type = string
 }
 
 variable "user" {
@@ -32,5 +32,5 @@ variable "region" {
 }
 
 variable "application" {
-  
+
 }
