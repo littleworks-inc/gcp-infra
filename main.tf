@@ -60,4 +60,5 @@ module "cloudsql-sql" {
   database_project  = var.project_id
   label_environment = var.label_environment
   label_application = var.label_application
+  depends_on = [ module.vpc_composer ]
 }
