@@ -31,6 +31,7 @@ resource "google_sql_database_instance" "db_instance" {
     ip_configuration {
       ipv4_enabled    = var.public_ip
       private_network = data.google_compute_network.vpc.self_link #var.vpc_link # the VPC where the db will be assigned a private IP
+      enable_private_path_for_google_cloud_services = true
     }
     user_labels = {
       environment = var.label_environment
