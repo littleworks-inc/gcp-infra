@@ -1,7 +1,8 @@
 module "enable-api" {
   source = "./modules/enable_apis"
   project_id = var.project_id
-  enable_api_services = ["vpcaccess.googleapis.com",
+  enable_api_services = ["compute.googleapis.com",
+                        "vpcaccess.googleapis.com",
                          "pubsub.googleapis.com",
                          "containerregistry.googleapis.com",
                          "monitoring.googleapis.com",
