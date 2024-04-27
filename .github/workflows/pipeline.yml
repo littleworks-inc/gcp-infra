@@ -19,10 +19,9 @@ jobs:
             gcp_backend_bucket_prefix: terraform
             tf_vars_file: dev.tfvars 
             enable_TFSEC: true 
-            workload_identity_provider: 'projects/428136795394/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
-            service_account: 'gcp-workload-identity@nomadic-rush-408023.iam.gserviceaccount.com'
-            # PROJECT_ID: "nomadic-rush-408023"
-            # PROJECT_NO: "428136795394"
+        secrets:
+            workload_identity_provider: ${{ secrets.workload_identity_provider }}
+            service_account: ${{ secrets.service_account }}
             # environment: dev
         permissions:
           contents: 'read'
@@ -37,10 +36,9 @@ jobs:
             gcp_backend_bucket: gcp-gitlab-ci-demo-01
             gcp_backend_bucket_prefix: terraform
             tf_vars_file: dev.tfvars 
-            workload_identity_provider: 'projects/428136795394/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
-            service_account: 'gcp-workload-identity@nomadic-rush-408023.iam.gserviceaccount.com'
-            # PROJECT_ID: "nomadic-rush-408023"
-            # PROJECT_NO: "428136795394"
+        secrets:
+            workload_identity_provider: ${{ secrets.workload_identity_provider }}
+            service_account: ${{ secrets.service_account }}
             # environment: dev
         permissions:
             contents: 'read'
