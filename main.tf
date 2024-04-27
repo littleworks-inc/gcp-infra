@@ -1,3 +1,31 @@
+module "vpc_composer" {
+  source                      = "./modules/vpc_creation"
+  vpc_name                    = "test-vpc"
+  vpc_description             = "VPC network for composer deployement"
+  vpc_auto_create_subnetworks = "false"
+  vpc_routing_mode            = "REGIONAL"
+}
+
+module "custom_subnet_01" {
+  source                          = "./modules/compute_subnetwork"
+  subnet_name                     = "snet-test-nane"
+  subnet_region                   = var.region
+  subnet_ip_cidr_range            = "10.162.0.0/20"
+  vpc_subnet_network              = module.vpc_composer.vpc_id
+  subnet_private_ip_google_access = "true"
+  vpc_secondary_subnet            = []
+}
+
+ module "storage_bucket_01"  {
+   source                = "./modules/storage"
+   region                = "northamerica-northeast1"
+   bucket_name           = "sb-dia-gcyhero-${var.label_environment}-data-staging"
+   project_name          = var.project_id
+   bucket_storage_class  = "STANDARD"
+   label_environment     = var.label_environment
+   label_application     = var.application
+}
+
 module "cloudsql-sql" {
   source            = "./modules/cloudsql-private"
   disk_size         = "50"

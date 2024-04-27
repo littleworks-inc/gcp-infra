@@ -30,3 +30,11 @@ variable "val_deletion_protection" {
 variable "region" {
   default = "northamerica-northeast1"
 }
+
+variable "label_environment" {
+  
+}
+
+variable "application" {
+  
+}
