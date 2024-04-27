@@ -20,8 +20,6 @@ jobs:
             tf_vars_file: dev.tfvars 
             enable_TFSEC: true 
             # environment: dev
-        # secrets:
-        #     GOOGLE_CREDENTIALS: ${{ secrets.TF_SA }}
 
     Dev_Deploy:
         needs: Dev_Plan
@@ -33,5 +31,3 @@ jobs:
             gcp_backend_bucket_prefix: terraform
             tf_vars_file: dev.tfvars 
             # environment: dev
-        # secrets:
-        #     GOOGLE_CREDENTIALS: ${{ secrets.TF_SA }}

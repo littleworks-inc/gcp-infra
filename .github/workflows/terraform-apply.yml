@@ -26,10 +26,6 @@ on:
       #   description: 'manual approvals in GitHub Actions with the Environments.'
       #   required: true
       #   type: string
-    secrets:
-      GOOGLE_CREDENTIALS:
-        description: 'GCP Service Account Json'
-        required: false
 
 jobs:
   build-apply:
@@ -44,7 +40,6 @@ jobs:
     env:
       bucket_name: ${{ inputs.gcp_backend_bucket }}
       bucket_prefix: ${{ inputs.gcp_backend_bucket_prefix }}
-      # GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
       PROJECT_ID: "nomadic-rush-408023"
       PROJECT_NO: "428136795394"
     
