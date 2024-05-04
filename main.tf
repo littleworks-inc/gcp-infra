@@ -100,5 +100,5 @@ module "redis_instance_01" {
 
   label_application = "label_application"
   label_environment = "label_environment"
-  depends_on = [ module.vpc_creation ]
+  depends_on        = [module.vpc_creation]
 }

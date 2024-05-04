@@ -22,18 +22,18 @@ on:
         description: 'GCP Storage bucket folder name to store terraform state file.'
         required: true
         type: string
-      workload_identity_provider:
-        description: 'gcp project iD'
-        required: true
-        type: string
-      service_account:
-        description: 'gcp project number'
-        required: true
-        type: string
       # environment:
       #   description: 'manual approvals in GitHub Actions with the Environments.'
       #   required: true
       #   type: string
+    secrets:
+      workload_identity_provider:
+        description: 'gcp project iD'
+        required: true
+      service_account:
+        description: 'gcp project number'
+        required: true
+     
 
 jobs:
   build-apply:
