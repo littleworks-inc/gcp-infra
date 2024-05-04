@@ -28,10 +28,10 @@ on:
       #   type: string
     secrets:
       workload_identity_provider:
-        description: 'gcp project iD'
+        description: 'gcp workload_identity_provider'
         required: true
       service_account:
-        description: 'gcp project number'
+        description: 'gcp service_account'
         required: true
      
 
@@ -60,8 +60,8 @@ jobs:
       uses: 'google-github-actions/auth@v2'
       with:
         # create_credentials_file: 'true'
-        workload_identity_provider: ${{ inputs.workload_identity_provider }}
-        service_account: ${{ inputs.service_account }}
+        workload_identity_provider: ${{ env.workload_identity_provider }}
+        service_account: ${{ env.service_account }}
 
     - name: Download Artifact
       uses: actions/download-artifact@v3.0.2

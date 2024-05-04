@@ -35,10 +35,10 @@ on:
       #   type: string
     secrets:
       workload_identity_provider:
-        description: 'gcp project iD'
+        description: 'gcp workload_identity_provider'
         required: true
       service_account:
-        description: 'gcp project number'
+        description: 'gcp service_account'
         required: true
 
 jobs:
@@ -54,7 +54,6 @@ jobs:
     env:
       bucket_name: ${{ inputs.gcp_backend_bucket }}
       bucket_prefix: ${{ inputs.gcp_backend_bucket_prefix }}
-      TF_VARS: ${{ inputs.tf_vars_file }}
       workload_identity_provider: ${{ secrets.workload_identity_provider }}
       service_account: ${{ secrets.service_account }}
 
@@ -67,8 +66,8 @@ jobs:
       uses: 'google-github-actions/auth@v2'
       with:
         # create_credentials_file: 'true'
-        workload_identity_provider: ${{ inputs.workload_identity_provider }}
-        service_account: ${{ inputs.service_account }}
+        workload_identity_provider: ${{ env.workload_identity_provider }}
+        service_account: ${{ env.service_account }}
 
     - name: tfsec
       uses: aquasecurity/tfsec-action@v1.0.0
