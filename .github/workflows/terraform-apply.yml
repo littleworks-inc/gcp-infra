@@ -48,8 +48,8 @@ jobs:
     env:
       bucket_name: ${{ inputs.gcp_backend_bucket }}
       bucket_prefix: ${{ inputs.gcp_backend_bucket_prefix }}
-      # PROJECT_ID: "nomadic-rush-408023"
-      # PROJECT_NO: "428136795394"
+      workload_identity_provider: ${{ secrets.workload_identity_provider }}
+      service_account: ${{ secrets.service_account }}
     
     steps:
     - name: Checkout
