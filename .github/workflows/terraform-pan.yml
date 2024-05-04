@@ -56,6 +56,7 @@ jobs:
       bucket_prefix: ${{ inputs.gcp_backend_bucket_prefix }}
       workload_identity_provider: ${{ secrets.workload_identity_provider }}
       service_account: ${{ secrets.service_account }}
+      TF_VARS: ${{ inputs.tf_vars_file }}
 
     steps:
     - name: Checkout
