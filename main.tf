@@ -82,3 +82,23 @@ module "cloudsql-sql" {
   label_application = var.label_application
   depends_on        = [google_service_networking_connection.private_vpc_connection]
 }
+
+
+module "redis_instance_01" {
+
+  source = "./modules/google_redis_instance"
+
+  redis_instance_name           = "test-redis-instance-01"
+  redis_instance_tier           = "BASIC"
+  redis_instance_memory_size_gb = 1
+
+  vpc_name                    = module.vpc_creation.vpc_name
+  vpc_project_name            = module.vpc_creation.vpc_project
+  redis_instance_connect_mode = "PRIVATE_SERVICE_ACCESS" #Possible values are DIRECT_PEERING and PRIVATE_SERVICE_ACCESS
+
+  redis_version = "REDIS_4_0"
+
+  label_application = "label_application"
+  label_environment = "label_environment"
+  depends_on = [ module.vpc_creation ]
+}
