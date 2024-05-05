@@ -80,5 +80,5 @@ jobs:
     - name: Terraform Init
       run: terraform init --backend-config="bucket=$bucket_name" --backend-config="prefix=$bucket_prefix"
 
-    # - name: Terraform Apply
-    #   run: terraform apply plan.tfplan 
+    - name: Terraform Apply
+      run: terraform apply plan.tfplan 
