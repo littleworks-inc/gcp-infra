@@ -84,21 +84,21 @@ module "cloudsql-sql" {
 }
 
 
-module "redis_instance_01" {
+# module "redis_instance_01" {
 
-  source = "./modules/google_redis_instance"
+#   source = "./modules/google_redis_instance"
 
-  redis_instance_name           = "test-redis-instance-01"
-  redis_instance_tier           = "BASIC"
-  redis_instance_memory_size_gb = 1
+#   redis_instance_name           = "test-redis-instance-01"
+#   redis_instance_tier           = "BASIC"
+#   redis_instance_memory_size_gb = 1
 
-  vpc_name                    = module.vpc_creation.vpc_name
-  vpc_project_name            = module.vpc_creation.vpc_project
-  redis_instance_connect_mode = "PRIVATE_SERVICE_ACCESS" #Possible values are DIRECT_PEERING and PRIVATE_SERVICE_ACCESS
+#   vpc_name                    = module.vpc_creation.vpc_name
+#   vpc_project_name            = module.vpc_creation.vpc_project
+#   redis_instance_connect_mode = "PRIVATE_SERVICE_ACCESS" #Possible values are DIRECT_PEERING and PRIVATE_SERVICE_ACCESS
 
-  redis_version = "REDIS_4_0"
+#   redis_version = "REDIS_4_0"
 
-  label_application = "label_application"
-  label_environment = "label_environment"
-  depends_on        = [module.vpc_creation]
-}
+#   label_application = "label_application"
+#   label_environment = "label_environment"
+#   depends_on        = [module.vpc_creation]
+# }
