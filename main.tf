@@ -55,15 +55,15 @@ resource "google_service_networking_connection" "private_vpc_connection" {
   reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
 }
 
-# module "storage_bucket_01" {
-#   source               = "./modules/storage"
-#   region               = "northamerica-northeast1"
-#   bucket_name          = "sb-dia-gcyhero-${var.label_environment}-data-staging"
-#   project_name         = var.project_id
-#   bucket_storage_class = "STANDARD"
-#   label_environment    = var.label_environment
-#   label_application    = var.application
-# }
+module "storage_bucket_01" {
+  source               = "./modules/storage"
+  region               = "northamerica-northeast1"
+  bucket_name          = "sb-dia-gcyhero-${var.label_environment}-data-staging"
+  project_name         = var.project_id
+  bucket_storage_class = "STANDARD"
+  label_environment    = var.label_environment
+  label_application    = var.application
+}
 
 # module "cloudsql-sql" {
 #   source            = "./modules/cloudsql-private"
