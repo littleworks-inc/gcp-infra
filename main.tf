@@ -36,7 +36,7 @@ module "custom_subnet_01" {
   source                          = "./modules/compute_subnetwork"
   subnet_name                     = "snet-test-nane"
   subnet_region                   = var.region
-  subnet_ip_cidr_range            = "10.162.0.0/20"
+  subnet_ip_cidr_range            = var.subnet_ip_cidr_range
   vpc_subnet_network              = module.vpc_creation.vpc_id
   subnet_private_ip_google_access = "true"
   vpc_secondary_subnet            = []
@@ -53,13 +53,13 @@ resource "google_compute_global_address" "private_ip_address" {
   depends_on    = [module.vpc_creation]
 }
 
-resource "google_service_networking_connection" "private_vpc_connection" {
-  # provider = google-beta
+# resource "google_service_networking_connection" "private_vpc_connection" {
+#   # provider = google-beta
 
-  network                 = module.vpc_creation.vpc_id
-  service                 = "servicenetworking.googleapis.com"
-  reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
-}
+#   network                 = module.vpc_creation.vpc_id
+#   service                 = "servicenetworking.googleapis.com"
+#   reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
+# }
 
 # module "storage_bucket_01" {
 #   source               = "./modules/storage"

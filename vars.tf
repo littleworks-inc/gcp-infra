@@ -33,3 +33,7 @@ variable "region" {
 variable "application" {
 
 }
+
+variable "subnet_ip_cidr_range" {
+  
+}
