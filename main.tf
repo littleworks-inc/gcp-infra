@@ -17,14 +17,14 @@ module "enable-api" {
   "servicenetworking.googleapis.com"]
 }
 
-# module "vpc_creation" {
-#   source                      = "./modules/vpc_creation"
-#   vpc_name                    = "test-vpc"
-#   vpc_description             = "VPC network for composer deployement"
-#   vpc_auto_create_subnetworks = "false"
-#   vpc_routing_mode            = "REGIONAL"
-#   depends_on                  = [module.enable-api]
-# }
+module "vpc_creation" {
+  source                      = "./modules/vpc_creation"
+  vpc_name                    = "test-vpc"
+  vpc_description             = "VPC network for composer deployement"
+  vpc_auto_create_subnetworks = "false"
+  vpc_routing_mode            = "REGIONAL"
+  depends_on                  = [module.enable-api]
+}
 
 # module "custom_subnet_01" {
 #   source                          = "./modules/compute_subnetwork"
