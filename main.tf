@@ -1,21 +1,21 @@
-# module "enable-api" {
-#   source     = "./modules/enable_apis"
-#   project_id = var.project_id
-#   enable_api_services = [
-#     "vpcaccess.googleapis.com",
-#     "pubsub.googleapis.com",
-#     "containerregistry.googleapis.com",
-#     "monitoring.googleapis.com",
-#     "iap.googleapis.com",
-#     "pubsublite.googleapis.com",
-#     "iamcredentials.googleapis.com",
-#     "serviceusage.googleapis.com",
-#     "iam.googleapis.com",
-#     "redis.googleapis.com",
-#     "sqladmin.googleapis.com",
-#     "secretmanager.googleapis.com",
-#   "servicenetworking.googleapis.com"]
-# }
+module "enable-api" {
+  source     = "./modules/enable_apis"
+  project_id = var.project_id
+  enable_api_services = [
+    "vpcaccess.googleapis.com",
+    "pubsub.googleapis.com",
+    "containerregistry.googleapis.com",
+    "monitoring.googleapis.com",
+    "iap.googleapis.com",
+    "pubsublite.googleapis.com",
+    "iamcredentials.googleapis.com",
+    "serviceusage.googleapis.com",
+    "iam.googleapis.com",
+    "redis.googleapis.com",
+    "sqladmin.googleapis.com",
+    "secretmanager.googleapis.com",
+  "servicenetworking.googleapis.com"]
+}
 
 # module "vpc_creation" {
 #   source                      = "./modules/vpc_creation"

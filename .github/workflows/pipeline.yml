@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:
+  # pull_request:
+  #   branches:
+  #     - main
+  # workflow_dispatch:
 
 permissions:
   contents: read
@@ -32,7 +32,7 @@ jobs:
 
     Dev_Deploy:
         needs: Dev_Plan
-        if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+        # if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
         uses: littleworks-inc/gcp-infra/.github/workflows/terraform-apply.yml@main
         with:
             path: .
