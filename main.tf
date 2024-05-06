@@ -104,14 +104,15 @@ resource "google_service_networking_connection" "private_vpc_connection" {
 #   depends_on         = [google_service_networking_connection.private_vpc_connection]
 # }
 
-resource "google_firestore_database" "database" {
-  project                           = var.project_id
-  name                              = "database-id"
-  location_id                       = "northamerica-northeast1"
-  type                              = "FIRESTORE_NATIVE"
-  concurrency_mode                  = "OPTIMISTIC"
-  app_engine_integration_mode       = "DISABLED"
-  point_in_time_recovery_enablement = "POINT_IN_TIME_RECOVERY_DISABLED"
-  delete_protection_state           = "DELETE_PROTECTION_DISABLED"
-  deletion_policy                   = "DELETE"
-}
+# resource "google_firestore_database" "database" {
+#   project                           = var.project_id
+#   name                              = "database-id"
+#   location_id                       = "northamerica-northeast1"
+#   type                              = "FIRESTORE_NATIVE"
+#   concurrency_mode                  = "OPTIMISTIC"
+#   app_engine_integration_mode       = "DISABLED"
+#   point_in_time_recovery_enablement = "POINT_IN_TIME_RECOVERY_DISABLED"
+#   delete_protection_state           = "DELETE_PROTECTION_DISABLED"
+#   deletion_policy                   = "DELETE"
+#   depends_on = [ module.enable-api ]
+# }
