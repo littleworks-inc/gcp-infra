@@ -65,23 +65,23 @@ module "storage_bucket_01" {
   label_application    = var.application
 }
 
-# module "cloudsql-sql" {
-#   source            = "./modules/cloudsql-private"
-#   disk_size         = "50"
-#   instance_type     = "db-f1-micro"
-#   user              = var.user
-#   password          = var.password
-#   vpc_project_name  = module.vpc_creation.vpc_project #var.sql_vpc_project_name
-#   vpc_name          = module.vpc_creation.vpc_name    #var.sql_vpc_name
-#   av_type           = "REGIONAL"                      #var.sql_av_type
-#   db_version        = "POSTGRES_15"                   #var.sql_db_version
-#   db_name           = "sql-test-01"
-#   region            = "northamerica-northeast1"
-#   database_project  = var.project_id
-#   label_environment = var.label_environment
-#   label_application = var.label_application
-#   depends_on        = [google_service_networking_connection.private_vpc_connection]
-# }
+module "cloudsql-sql" {
+  source            = "./modules/cloudsql-private"
+  disk_size         = "50"
+  instance_type     = "db-f1-micro"
+  user              = var.user
+  password          = var.password
+  vpc_project_name  = module.vpc_creation.vpc_project #var.sql_vpc_project_name
+  vpc_name          = module.vpc_creation.vpc_name    #var.sql_vpc_name
+  av_type           = "REGIONAL"                      #var.sql_av_type
+  db_version        = "POSTGRES_15"                   #var.sql_db_version
+  db_name           = "sql-test-01"
+  region            = "northamerica-northeast1"
+  database_project  = var.project_id
+  label_environment = var.label_environment
+  label_application = var.label_application
+  depends_on        = [google_service_networking_connection.private_vpc_connection]
+}
 
 
 # module "redis_instance_01" {
