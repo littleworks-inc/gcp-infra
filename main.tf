@@ -93,6 +93,7 @@ module "memorystore" {
   memory_size_gb = "1"
 
   tier = "BASIC"
+  location_id = "northamerica-northeast1"
 
   authorized_network = module.vpc_creation.vpc_id
   connect_mode       = "PRIVATE_SERVICE_ACCESS"
