@@ -26,15 +26,15 @@ module "vpc_creation" {
   depends_on                  = [module.enable-api]
 }
 
-# module "custom_subnet_01" {
-#   source                          = "./modules/compute_subnetwork"
-#   subnet_name                     = "snet-test-nane"
-#   subnet_region                   = var.region
-#   subnet_ip_cidr_range            = "10.162.0.0/20"
-#   vpc_subnet_network              = module.vpc_creation.vpc_id
-#   subnet_private_ip_google_access = "true"
-#   vpc_secondary_subnet            = []
-# }
+module "custom_subnet_01" {
+  source                          = "./modules/compute_subnetwork"
+  subnet_name                     = "snet-test-nane"
+  subnet_region                   = var.region
+  subnet_ip_cidr_range            = "10.162.0.0/20"
+  vpc_subnet_network              = module.vpc_creation.vpc_id
+  subnet_private_ip_google_access = "true"
+  vpc_secondary_subnet            = []
+}
 
 # resource "google_compute_global_address" "private_ip_address" {
 #   # provider = google-beta
