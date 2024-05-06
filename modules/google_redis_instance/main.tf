@@ -1,50 +1,53 @@
-data "google_compute_network" "vpc" {
-  name    = var.vpc_name
-  project = var.vpc_project_name
-}
+resource "google_redis_instance" "default" {
+  depends_on = [module.enable_apis]
 
-resource "google_redis_instance" "single_instance" {
-  count          = var.highly_available ? 0 : 1
-  name           = var.redis_instance_name
-  tier           = var.redis_instance_tier
-  memory_size_gb = var.redis_instance_memory_size_gb
+  project            = var.project
+  name               = var.name
+  tier               = var.tier
+  replica_count      = var.tier == "STANDARD_HA" ? var.replica_count : null
+  read_replicas_mode = var.tier == "STANDARD_HA" ? var.read_replicas_mode : null
+  memory_size_gb     = var.memory_size_gb
+  connect_mode       = var.connect_mode
 
-  #location_id             = "us-central1-a"
-  #alternative_location_id = "us-central1-f"
+  region                  = var.region
+  location_id             = var.location_id
+  alternative_location_id = var.alternative_location_id
 
-  authorized_network = data.google_compute_network.vpc.self_link
-  connect_mode       = var.redis_instance_connect_mode
+  authorized_network   = var.authorized_network
+  customer_managed_key = var.customer_managed_key
 
-  redis_version = var.redis_version
-  display_name  = var.redis_instance_name
+  redis_version      = var.redis_version
+  redis_configs      = var.redis_configs
+  display_name       = var.display_name
+  reserved_ip_range  = var.reserved_ip_range
+  secondary_ip_range = var.secondary_ip_range
 
-  #depends_on = [google_service_networking_connection.private_service_connection]
+  labels = var.labels
 
-  labels = {
-    environment = var.label_environment
-    application = var.label_application
+  auth_enabled = var.auth_enabled
+
+  transit_encryption_mode = var.transit_encryption_mode
+
+  dynamic "maintenance_policy" {
+    for_each = var.maintenance_policy != null ? [var.maintenance_policy] : []
+    content {
+      weekly_maintenance_window {
+        day = maintenance_policy.value["day"]
+        start_time {
+          hours   = maintenance_policy.value["start_time"]["hours"]
+          minutes = maintenance_policy.value["start_time"]["minutes"]
+          seconds = maintenance_policy.value["start_time"]["seconds"]
+          nanos   = maintenance_policy.value["start_time"]["nanos"]
+        }
+      }
+    }
   }
-}
 
-resource "google_redis_instance" "highly_available" {
-  count          = var.highly_available ? 1 : 0
-  name           = var.redis_instance_name
-  tier           = var.redis_instance_tier
-  memory_size_gb = var.redis_instance_memory_size_gb
-
-  location_id             = var.redis_location_zone_01
-  alternative_location_id = var.redis_location_zone_02
-
-  authorized_network = data.google_compute_network.vpc.self_link
-  connect_mode       = var.redis_instance_connect_mode
-
-  redis_version = var.redis_version
-  display_name  = var.redis_instance_name
-
-  #depends_on = [google_service_networking_connection.private_service_connection]
-
-  labels = {
-    environment = var.label_environment
-    application = var.label_application
+  dynamic "persistence_config" {
+    for_each = var.persistence_config != null ? [var.persistence_config] : []
+    content {
+      persistence_mode    = persistence_config.value["persistence_mode"]
+      rdb_snapshot_period = persistence_config.value["rdb_snapshot_period"]
+    }
   }
 }

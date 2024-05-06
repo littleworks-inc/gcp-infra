@@ -9,7 +9,7 @@ variable "password" {
 }
 
 variable "user" {
-  type    = string
+  type = string
 }
 
 variable "label_environment" {

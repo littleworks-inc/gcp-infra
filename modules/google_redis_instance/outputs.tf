@@ -1,46 +1,46 @@
-############################## Redis Single Instance output #####################################
-output "single_instance_id" {
-  value = google_redis_instance.single_instance.*.id
+output "id" {
+  description = "The memorystore instance ID."
+  value       = google_redis_instance.default.id
 }
 
-output "single_instance_current_location_id" {
-  value = google_redis_instance.single_instance.*.current_location_id
+output "host" {
+  description = "The IP address of the instance."
+  value       = google_redis_instance.default.host
 }
 
-output "single_instance_host" {
-  value = google_redis_instance.single_instance.*.host
+output "port" {
+  description = "The port number of the exposed Redis endpoint."
+  value       = google_redis_instance.default.port
 }
 
-output "single_instance_port" {
-  value = google_redis_instance.single_instance.*.port
+output "read_endpoint" {
+  description = " The IP address of the exposed readonly Redis endpoint."
+  value       = google_redis_instance.default.read_endpoint
 }
 
-output "single_instance_persistence_iam_identity" {
-  value = google_redis_instance.single_instance.*.persistence_iam_identity
+output "region" {
+  description = "The region the instance lives in."
+  value       = google_redis_instance.default.region
 }
 
-############################## Redis highly available output #####################################
-
-/* output "highly_available_id" {
-    value = google_redis_instance.highly_available.id
+output "current_location_id" {
+  description = "The current zone where the Redis endpoint is placed."
+  value       = google_redis_instance.default.current_location_id
 }
 
-output "highly_available_current_location_id" {
-    value = google_redis_instance.highly_available.current_location_id
+output "persistence_iam_identity" {
+  description = "Cloud IAM identity used by import/export operations. Format is 'serviceAccount:'. May change over time"
+  value       = google_redis_instance.default.persistence_iam_identity
 }
 
-output "highly_available_current_location_id" {
-    value = google_redis_instance.highly_available.current_location_id
+output "auth_string" {
+  description = "AUTH String set on the instance. This field will only be populated if auth_enabled is true."
+  value       = google_redis_instance.default.auth_string
+  sensitive   = true
 }
 
-output "highly_available_host" {
-    value = google_redis_instance.highly_available.current_location_host
+output "server_ca_certs" {
+  description = "List of server CA certificates for the instance"
+  value       = google_redis_instance.default.server_ca_certs
+  sensitive   = false
 }
-
-output "highly_available_port" {
-    value = google_redis_instance.highly_available.current_location_port
-}
-
-output "highly_available_persistence_iam_identity" {
-    value = google_redis_instance.highly_available.persistence_iam_identity
-} */
