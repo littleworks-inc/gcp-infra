@@ -1,5 +1,4 @@
 resource "google_redis_instance" "default" {
-  depends_on = [module.enable_apis]
 
   project            = var.project
   name               = var.name
