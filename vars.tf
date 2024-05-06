@@ -10,7 +10,6 @@ variable "password" {
 
 variable "user" {
   type    = string
-  default = ""
 }
 
 variable "label_environment" {
