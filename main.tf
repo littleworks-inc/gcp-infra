@@ -47,13 +47,13 @@ resource "google_compute_global_address" "private_ip_address" {
   depends_on    = [module.vpc_creation]
 }
 
-# resource "google_service_networking_connection" "private_vpc_connection" {
-#   # provider = google-beta
+resource "google_service_networking_connection" "private_vpc_connection" {
+  # provider = google-beta
 
-#   network                 = module.vpc_creation.vpc_id
-#   service                 = "servicenetworking.googleapis.com"
-#   reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
-# }
+  network                 = module.vpc_creation.vpc_id
+  service                 = "servicenetworking.googleapis.com"
+  reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
+}
 
 # module "storage_bucket_01" {
 #   source               = "./modules/storage"
