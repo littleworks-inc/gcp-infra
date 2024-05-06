@@ -17,7 +17,9 @@ module "enable-api" {
     "servicenetworking.googleapis.com",
     "redis.googleapis.com",
     "memcache.googleapis.com",
-    "firestore.googleapis.com"
+    "firestore.googleapis.com",
+    "run.googleapis.com",
+    "cloud.googleapis.com"
   ]
 }
 
