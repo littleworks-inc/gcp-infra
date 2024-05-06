@@ -23,35 +23,35 @@ module "enable-api" {
   ]
 }
 
-module "vpc_creation" {
-  source                      = "./modules/vpc_creation"
-  vpc_name                    = "test-vpc"
-  vpc_description             = "VPC network for composer deployement"
-  vpc_auto_create_subnetworks = "false"
-  vpc_routing_mode            = "REGIONAL"
-  depends_on                  = [module.enable-api]
-}
+# module "vpc_creation" {
+#   source                      = "./modules/vpc_creation"
+#   vpc_name                    = var.vpc_name
+#   vpc_description             = var.vpc_description
+#   vpc_auto_create_subnetworks = var.vpc_auto_create_subnetworks
+#   vpc_routing_mode            = var.vpc_routing_mode
+#   depends_on                  = [module.enable-api]
+# }
 
-module "custom_subnet_01" {
-  source                          = "./modules/compute_subnetwork"
-  subnet_name                     = "snet-test-nane"
-  subnet_region                   = var.region
-  subnet_ip_cidr_range            = var.subnet_ip_cidr_range
-  vpc_subnet_network              = module.vpc_creation.vpc_id
-  subnet_private_ip_google_access = "true"
-  vpc_secondary_subnet            = []
-}
+# module "custom_subnet_01" {
+#   source                          = "./modules/compute_subnetwork"
+#   subnet_name                     = "snet-${var.env}"
+#   subnet_region                   = var.region
+#   subnet_ip_cidr_range            = var.subnet_ip_cidr_range
+#   vpc_subnet_network              = module.vpc_creation.vpc_id
+#   subnet_private_ip_google_access = var.subnet_private_ip_google_access
+#   vpc_secondary_subnet            = []
+# }
 
-resource "google_compute_global_address" "private_ip_address" {
-  # provider = google-beta
+# resource "google_compute_global_address" "private_ip_address" {
+#   # provider = google-beta
 
-  name          = "private-ip-address"
-  purpose       = "VPC_PEERING"
-  address_type  = "INTERNAL"
-  prefix_length = 16
-  network       = module.vpc_creation.vpc_id
-  depends_on    = [module.vpc_creation]
-}
+#   name          = "private-ip-address-${var.env}"
+#   purpose       = "VPC_PEERING"
+#   address_type  = "INTERNAL"
+#   prefix_length = 16
+#   network       = module.vpc_creation.vpc_id
+#   depends_on    = [module.vpc_creation]
+# }
 
 # resource "google_service_networking_connection" "private_vpc_connection" {
 #   # provider = google-beta
