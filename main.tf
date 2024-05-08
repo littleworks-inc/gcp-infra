@@ -19,7 +19,8 @@ module "enable-api" {
     "memcache.googleapis.com",
     "firestore.googleapis.com",
     "run.googleapis.com",
-    "cloud.googleapis.com"
+    "cloud.googleapis.com",
+    "clouddeploy.googleapis.com"
   ]
 }
 
